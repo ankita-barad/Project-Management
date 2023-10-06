@@ -1,0 +1,17 @@
+<!-- project-listing.component.html -->
+
+<div *ngFor="let project of projects" class="project-card">
+  <h3>{{ project.name }}</h3>
+
+  <button (click)="onProjectClick(project)" class="view-details-button">
+    {{ selectedProjectId === project._id ? "Hide Details" : "View Details" }}
+  </button>
+
+  <!-- Display project details when selectedProject is not null -->
+  <div *ngIf="selectedProjectId === project._id" class="project-details">
+    <p>Description: {{ project.description }}</p>
+    <p>Start Date: {{ project.startDate }}</p>
+    <p>End Date: {{ project.endDate }}</p>
+    <p>Project Manager: {{ project.projectManager }}</p>
+  </div>
+</div>

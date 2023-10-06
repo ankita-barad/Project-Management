@@ -1,0 +1,15 @@
+<div *ngFor="let task of tasks" class="task-card">
+  <h3>{{ task.title }}</h3>
+
+  <button (click)="onTaskClick(task)" class="view-details-button">
+    {{ selectedTaskId === task._id ? "Hide Details" : "View Details" }}
+  </button>
+
+  <!-- Display task details when selectedTaskId is not null -->
+  <div *ngIf="selectedTaskId === task._id" class="task-details">
+    <p>Description: {{ task.description }}</p>
+    <p>Due Date: {{ task.dueDate }}</p>
+    <p>Priority: {{ task.priority }}</p>
+    <p>Status: {{ task.status }}</p>
+  </div>
+</div>

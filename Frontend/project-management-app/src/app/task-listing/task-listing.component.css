@@ -1,0 +1,45 @@
+/* task-listing.component.css */
+
+/* Style for the container that holds task cards */
+.task-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Style for individual task cards */
+.task-card {
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.task-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Style for the "View Details" button */
+.view-details-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.view-details-button:hover {
+  background-color: #0056b3;
+}
+
+/* Style for task details section */
+.task-details {
+  margin-top: 10px;
+  display: block;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
