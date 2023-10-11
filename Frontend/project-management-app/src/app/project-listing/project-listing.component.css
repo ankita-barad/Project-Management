@@ -24,7 +24,7 @@
 
 /* Style for the "View Details" button */
 .view-details-button {
-  background-color: #007bff;
+  background-color: #e59866;
   color: #fff;
   border: none;
   padding: 10px 15px;
@@ -32,7 +32,7 @@
 }
 
 .view-details-button:hover {
-  background-color: #0056b3;
+  background-color: #f5cba7;
 }
 
 /* Style for project details section */

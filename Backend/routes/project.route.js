@@ -1,6 +1,6 @@
 const express = require("express");
 const projectRouter = express.Router();
-const { ProjectModel } = require("../models/project.model");
+const { ProjectModel } = require("./models/project.model");
 
 // Create a new project
 projectRouter.post("/create", async (req, res) => {
