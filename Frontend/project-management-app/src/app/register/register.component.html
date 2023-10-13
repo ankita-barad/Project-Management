@@ -1,18 +1,10 @@
-<nav class="navbar">
-  <div class="navbar-brand">
-    <h1>ProjectHuB</h1>
-  </div>
-</nav>
-
 <div class="container">
   <div class="card">
     <div class="card-header">
       <h2>Registration</h2>
     </div>
     <div class="card-body">
-      <form (ngSubmit)="register()">
-        <!-- Registration form content as provided -->
-
+      <form (ngSubmit)="register()" #registrationForm="ngForm">
         <label for="username">Username:</label>
         <input
           type="text"
@@ -20,7 +12,13 @@
           name="username"
           [(ngModel)]="user.username"
           required
+          #username="ngModel"
         />
+        <div *ngIf="username.invalid && (username.dirty || username.touched)">
+          <div class="alert alert-danger" role="alert">
+            Username is required.
+          </div>
+        </div>
 
         <label for="email">Email:</label>
         <input
@@ -29,7 +27,14 @@
           name="email"
           [(ngModel)]="user.email"
           required
+          pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+          #email="ngModel"
         />
+        <div *ngIf="email.invalid && (email.dirty || email.touched)">
+          <div class="alert alert-danger" role="alert">
+            Please enter a valid email.
+          </div>
+        </div>
 
         <label for="password">Password:</label>
         <input
@@ -38,16 +43,35 @@
           name="password"
           [(ngModel)]="user.password"
           required
+          [pattern]="passwordPattern"
+          #password="ngModel"
         />
+        <div *ngIf="password.invalid && (password.dirty || password.touched)">
+          <div class="alert alert-danger" role="alert">
+            Password is required and must contain at least one capital letter
+            and one special character.
+          </div>
+        </div>
 
         <label for="role">Role:</label>
-        <select id="role" name="role" [(ngModel)]="user.role" required>
+        <select
+          id="role"
+          name="role"
+          [(ngModel)]="user.role"
+          required
+          #role="ngModel"
+        >
           <option value="admin">Admin</option>
           <option value="project_manager">Project Manager</option>
           <option value="team_member">Team Member</option>
         </select>
+        <div *ngIf="role.invalid && (role.dirty || role.touched)">
+          <div class="alert alert-danger" role="alert">Role is required.</div>
+        </div>
 
-        <button type="submit">Register</button>
+        <button type="submit" [disabled]="registrationForm.invalid">
+          Register
+        </button>
       </form>
     </div>
   </div>

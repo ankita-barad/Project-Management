@@ -15,6 +15,8 @@ export class LoginComponent {
     private userServiceService: UserServiceService
   ) {}
 
+  passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+
   login() {
     // Call the UserService to log in the user
     this.userServiceService.loginUser(this.user).subscribe(

@@ -4,10 +4,13 @@ const taskSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String },
   dueDate: { type: Date },
-  priority: { type: String, required: true },
-  status: { type: String, required: true },
-  projectID: { type: String, required: true, ref: "project" },
-  parentTask: { type: String, ref: "task" }, // Reference to Tasks collection
+  priority: { type: String },
+  status: { type: String },
+  assigne: { type: String },
+  projectID: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "project", // Reference to the User model
+  },
 });
 
 const TaskModel = mongoose.model("task", taskSchema);

@@ -37,4 +37,9 @@ export class ProjectListingService {
   deleteProject(projectId: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/delete/${projectId}`);
   }
+
+  // Define a method to fetch project details by ID
+  getProjectDetails(projectId: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/get/${projectId}`); // Adjust the endpoint
+  }
 }

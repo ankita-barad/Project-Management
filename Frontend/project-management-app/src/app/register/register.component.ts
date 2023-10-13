@@ -21,6 +21,8 @@ export class RegisterComponent {
     private userServiceService: UserServiceService
   ) {}
 
+  passwordPattern = /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
+
   register() {
     // Call the UserService to register the user
     this.userServiceService.registerUser(this.user).subscribe(

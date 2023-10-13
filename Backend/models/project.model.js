@@ -5,7 +5,10 @@ const projectSchema = new mongoose.Schema({
   description: { type: String },
   startDate: { type: Date },
   endDate: { type: Date },
-  projectManager: { type: String, ref: "user" }, // Reference to Users collection
+  projectManager: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user", // Reference to the User model
+  },
 });
 
 const ProjectModel = mongoose.model("project", projectSchema);

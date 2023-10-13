@@ -1,124 +1,132 @@
 <!-- project-listing.component.html -->
+<nav class="navbar">
+  <div class="navbar-brand">
+    <h1>Projects</h1>
+  </div>
+</nav>
+<div class="project-listing-container">
+  <form (ngSubmit)="addProject()" class="add-project-form">
+    <label for="name">Name:</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      [(ngModel)]="newProject.name"
+      required
+    />
 
-<h3>Project Listing Page</h3>
+    <label for="description">Description:</label>
+    <textarea
+      id="description"
+      name="description"
+      [(ngModel)]="newProject.description"
+    ></textarea>
 
-<form (ngSubmit)="addProject()" class="add-project-form">
-  <label for="name">Name:</label>
-  <input
-    type="text"
-    id="name"
-    name="name"
-    [(ngModel)]="newProject.name"
-    required
-  />
+    <label for="startDate">Start Date:</label>
+    <input
+      type="date"
+      id="startDate"
+      name="startDate"
+      [(ngModel)]="newProject.startDate"
+      required
+    />
 
-  <label for="description">Description:</label>
-  <textarea
-    id="description"
-    name="description"
-    [(ngModel)]="newProject.description"
-  ></textarea>
+    <label for="endDate">End Date:</label>
+    <input
+      type="date"
+      id="endDate"
+      name="endDate"
+      [(ngModel)]="newProject.endDate"
+      required
+    />
 
-  <label for="startDate">Start Date:</label>
-  <input
-    type="date"
-    id="startDate"
-    name="startDate"
-    [(ngModel)]="newProject.startDate"
-    required
-  />
+    <button type="submit">Add Project</button>
+  </form>
 
-  <label for="endDate">End Date:</label>
-  <input
-    type="date"
-    id="endDate"
-    name="endDate"
-    [(ngModel)]="newProject.endDate"
-    required
-  />
+  <div class="project-cards">
+    <div
+      *ngFor="let project of projects"
+      class="project-card"
+      (click)="navigateToTasks(project._id)"
+    >
+      <h3>{{ project.name }}</h3>
 
-  <label for="projectManager">Project Manager:</label>
-  <input
-    type="text"
-    id="projectManager"
-    name="projectManager"
-    [(ngModel)]="newProject.projectManager"
-    required
-  />
+      <button
+        (click)="onProjectClick(project)"
+        class="view-details-button"
+        (click)="preventNavigation($event)"
+      >
+        {{
+          selectedProjectId === project._id ? "Hide Details" : "View Details"
+        }}
+      </button>
 
-  <button type="submit">Add Project</button>
-</form>
-<div *ngFor="let project of projects" class="project-card">
-  <h3>{{ project.name }}</h3>
+      <div *ngIf="selectedProjectId === project._id" class="project-details">
+        <p>Description: {{ project.description }}</p>
+        <p>Start Date: {{ project.startDate }}</p>
+        <p>End Date: {{ project.endDate }}</p>
+        <p>Project Manager: {{ project.projectManager }}</p>
 
-  <button (click)="onProjectClick(project)" class="view-details-button">
-    {{ selectedProjectId === project._id ? "Hide Details" : "View Details" }}
-  </button>
+        <button (click)="onEditClick(project)" class="edit-project-button">
+          Edit Project
+        </button>
 
-  <!-- Display project details when selectedProject is not null -->
-  <div *ngIf="selectedProjectId === project._id" class="project-details">
-    <p>Description: {{ project.description }}</p>
-    <p>Start Date: {{ project.startDate }}</p>
-    <p>End Date: {{ project.endDate }}</p>
-    <p>Project Manager: {{ project.projectManager }}</p>
+        <div *ngIf="isEditing(project)" class="edit-project-form">
+          <label for="editName">Name:</label>
+          <input
+            type="text"
+            id="editName"
+            name="editName"
+            [(ngModel)]="editedProject.name"
+            required
+          />
 
-    <!-- Edit button to show/hide the edit form -->
-    <button (click)="onEditClick(project)" class="edit-project-button">
-      Edit Project
-    </button>
+          <label for="editDescription">Description:</label>
+          <textarea
+            id="editDescription"
+            name="editDescription"
+            [(ngModel)]="editedProject.description"
+          ></textarea>
 
-    <!-- Edit form, shown when editing is active -->
-    <div *ngIf="isEditing(project)" class="edit-project-form">
-      <label for="editName">Name:</label>
-      <input
-        type="text"
-        id="editName"
-        name="editName"
-        [(ngModel)]="editedProject.name"
-        required
-      />
+          <label for="editStartDate">Start Date:</label>
+          <input
+            type="date"
+            id="editStartDate"
+            name="editStartDate"
+            [(ngModel)]="editedProject.startDate"
+            required
+          />
 
-      <label for="editDescription">Description:</label>
-      <textarea
-        id="editDescription"
-        name="editDescription"
-        [(ngModel)]="editedProject.description"
-      ></textarea>
+          <label for="editEndDate">End Date:</label>
+          <input
+            type="date"
+            id="editEndDate"
+            name="editEndDate"
+            [(ngModel)]="editedProject.endDate"
+            required
+          />
 
-      <label for="editStartDate">Start Date:</label>
-      <input
-        type="date"
-        id="editStartDate"
-        name="editStartDate"
-        [(ngModel)]="editedProject.startDate"
-        required
-      />
+          <label for="editProjectManager">Project Manager:</label>
+          <input
+            type="text"
+            id="editProjectManager"
+            name="editProjectManager"
+            [(ngModel)]="editedProject.projectManager"
+            required
+          />
 
-      <label for="editEndDate">End Date:</label>
-      <input
-        type="date"
-        id="editEndDate"
-        name="editEndDate"
-        [(ngModel)]="editedProject.endDate"
-        required
-      />
+          <button (click)="updateProject()" class="update-project-button">
+            Save Changes
+          </button>
+        </div>
+      </div>
 
-      <label for="editProjectManager">Project Manager:</label>
-      <input
-        type="text"
-        id="editProjectManager"
-        name="editProjectManager"
-        [(ngModel)]="editedProject.projectManager"
-        required
-      />
-
-      <button (click)="updateProject()" class="update-project-button">
-        Save Changes
+      <button
+        (click)="deleteProject(project._id)"
+        class="delete-project-button"
+      >
+        Delete Project
       </button>
     </div>
   </div>
-
-  <button (click)="deleteProject(project._id)" class="delete-project-button">
-    Delete Project
-  </button>
 </div>

@@ -2,7 +2,7 @@ const express = require("express");
 const userRouter = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { UserModel } = require("./models/user.model");
+const { UserModel } = require("../models/user.model");
 
 userRouter.post("/register", async (req, res, next) => {
   try {
@@ -62,6 +62,58 @@ userRouter.post("/login", async (req, res, next) => {
     res.json({ token });
   } catch (error) {
     next(error);
+  }
+});
+
+userRouter.get("/", async (req, res) => {
+  try {
+    const users = await UserModel.find();
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Get a user by ID
+userRouter.get("/:userId", async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(user);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Update a user by ID
+userRouter.put("/:userId", async (req, res) => {
+  try {
+    const updatedUser = await UserModel.findByIdAndUpdate(
+      req.params.userId,
+      req.body,
+      { new: true }
+    );
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json(updatedUser);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Delete a user by ID
+userRouter.delete("/:userId", async (req, res) => {
+  try {
+    const deletedUser = await UserModel.findByIdAndRemove(req.params.userId);
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.json({ message: "User deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 

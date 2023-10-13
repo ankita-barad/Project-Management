@@ -3,6 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProjectListingService } from '../project-listing.service';
+import { Router } from '@angular/router'; //
 
 @Component({
   selector: 'app-project-listing',
@@ -17,7 +18,8 @@ export class ProjectListingComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private projectListingService: ProjectListingService
+    private projectListingService: ProjectListingService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -102,5 +104,13 @@ export class ProjectListingComponent implements OnInit {
         this.fetchProjects();
       });
     }
+  }
+
+  navigateToTasks(projectId: string): void {
+    this.router.navigate([`/tasks/${projectId}`]);
+  }
+  preventNavigation(event: any): void {
+    event.preventDefault();
+    event.stopPropagation();
   }
 }

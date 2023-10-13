@@ -50,6 +50,11 @@ form {
   display: flex;
   flex-direction: column;
 }
+.add-project-form {
+  display: flex;
+  flex-direction: column;
+  width: 54%;
+}
 
 label {
   font-weight: bold;
@@ -76,4 +81,131 @@ button {
 
 button:hover {
   background-color: var(--secondary-color);
+}
+
+/* Navbar styles */
+.navbar {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem;
+}
+
+.navbar h1 {
+  margin: 0;
+  text-align: center;
+}
+
+/* Project Listing styles */
+.project-listing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.project-listing-container h2 {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.project-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.project-card {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  transition: box-shadow 0.2s ease-in-out;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.project-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.project-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.view-details-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.view-details-button:hover {
+  background-color: var(--secondary-color);
+}
+
+.project-details {
+  background-color: #f7f7f7;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+
+/* Edit Project button */
+.edit-project-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.edit-project-button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Delete Project button */
+.delete-project-button {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.delete-project-button:hover {
+  background-color: #e84545;
+}
+
+/* Edit project form */
+.edit-project-form {
+  display: none;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+/* Adjustments for mobile devices */
+@media (max-width: 768px) {
+  .project-cards {
+    flex-direction: column;
+  }
+
+  .project-card {
+    width: 100%;
+  }
 }

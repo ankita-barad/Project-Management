@@ -1,17 +1,27 @@
 const express = require("express");
 const projectRouter = express.Router();
-const { ProjectModel } = require("./models/project.model");
+const { ProjectModel } = require("../models/project.model");
+const { auth } = require("../middleware/validateToken");
 
 // Create a new project
-projectRouter.post("/create", async (req, res) => {
+projectRouter.post("/create", auth, async (req, res) => {
   try {
-    const project = new ProjectModel(req.body);
+    const { name, description, startDate, endDate } = req.body;
+    const project = new ProjectModel({
+      name,
+      description,
+      startDate,
+      endDate,
+      projectManager: req.userId,
+    });
     const savedProject = await project.save();
     res.json(savedProject);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 });
+
+
 
 // Get all projects
 projectRouter.get("/list", async (req, res) => {
