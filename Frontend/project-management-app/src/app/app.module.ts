@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'project', component: ProjectListingComponent },
   { path: 'task', component: TaskListingComponent },
   { path: 'tasks/:id', component: TaskComponent },
+  { path: 'logout', component: LoginComponent },
 
   // Add other routes for your application
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirect to login page

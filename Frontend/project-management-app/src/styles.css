@@ -3,6 +3,11 @@
   --primary-color: #e59866;
   --secondary-color: #f5cba7;
 }
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 /* Navbar styles */
 .navbar {
@@ -22,6 +27,8 @@
   justify-content: center;
   align-items: center;
   height: calc(100vh - 64px); /* Adjust based on your navbar height */
+  width: 80%;
+  margin: 0 auto;
 }
 
 /* Card styles */
@@ -29,7 +36,8 @@
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  width: 400px;
+  width: 40%;
+  padding: 24px;
 }
 
 .card-header {
@@ -50,7 +58,8 @@ form {
   display: flex;
   flex-direction: column;
 }
-.add-project-form {
+.add-project-form,
+.add-task-form {
   display: flex;
   flex-direction: column;
   width: 54%;
@@ -95,12 +104,78 @@ button:hover {
   text-align: center;
 }
 
-/* Project Listing styles */
-.project-listing-container {
+/* Add the following styles for the registration layout */
+.registration-container {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 64px); /* Adjust based on your navbar height */
+}
+
+.registration-form {
+  width: 50%; /* Adjust the width of the form side as needed */
+  padding: 20px;
+}
+
+.registration-image img {
+  width: 100%; /* Adjust the width of the image side as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-image img {
+  width: 100%; /* Adjust the width of the image side as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Rest of your existing CSS styles */
+
+.navbar_project {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.navbar_task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.navbar-logout button {
+  font-size: 20px;
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 10px;
+}
+.navbar-brand p {
+  font-size: 22px;
+}
+
+/* Project Listing styles */
+.project-listing-container,
+.task-container {
+  display: flex;
+  justify-content: space-evenly;
   align-items: center;
   padding: 20px;
+}
+.left-container {
+  margin-top: 40px;
+  width: 45%; /* Adjust the width as needed */
+}
+
+.right-container {
+  width: 45%; /* Adjust the width as needed */
 }
 
 .project-listing-container h2 {
@@ -111,7 +186,8 @@ button:hover {
   border-radius: 8px;
 }
 
-.project-cards {
+.project-cards,
+.task-cards {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -119,7 +195,8 @@ button:hover {
   align-items: flex-start;
 }
 
-.project-card {
+.project-card,
+.task-card {
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -138,6 +215,13 @@ button:hover {
 
 .project-card:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.task_heading {
+  width: 80px;
+  padding: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 8px;
 }
 
 .view-details-button {
@@ -207,5 +291,20 @@ button:hover {
 
   .project-card {
     width: 100%;
+  }
+}
+
+/* For responsive layout adjustments */
+@media (max-width: 768px) {
+  .registration-container {
+    flex-direction: column;
+  }
+
+  .registration-form {
+    width: 100%; /* Full width on smaller screens */
+  }
+
+  .registration-image {
+    width: 100%; /* Full width on smaller screens */
   }
 }

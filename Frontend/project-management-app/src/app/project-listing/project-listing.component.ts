@@ -109,8 +109,10 @@ export class ProjectListingComponent implements OnInit {
   navigateToTasks(projectId: string): void {
     this.router.navigate([`/tasks/${projectId}`]);
   }
-  preventNavigation(event: any): void {
-    event.preventDefault();
-    event.stopPropagation();
+  logout() {
+    // Perform logout actions here, e.g., clearing user session, etc.
+
+    // Navigate to the login page
+    this.router.navigate(['/login']);
   }
 }

@@ -1,10 +1,23 @@
+<div class="navbar">
+  <h1>QuickPlan</h1>
+</div>
 <div class="container">
+  <div class="registration-image">
+    <img
+      src="https://cdn-cashy-static-assets.lucidchart.com/marketing/blog/2019Q1/why-pm-is-important/project-management-header.png"
+      alt="image not found"
+    />
+  </div>
   <div class="card">
     <div class="card-header">
       <h2>Registration</h2>
     </div>
     <div class="card-body">
-      <form (ngSubmit)="register()" #registrationForm="ngForm">
+      <form
+        (ngSubmit)="register()"
+        #registrationForm="ngForm"
+        class="registerForm"
+      >
         <label for="username">Username:</label>
         <input
           type="text"

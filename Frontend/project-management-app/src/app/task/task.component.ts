@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectListingService } from '../project-listing.service';
 import { TaskService } from '../task.service';
 import { UserServiceService } from '../user-service.service'; // Import the UserServiceService
+import { Router } from '@angular/router'; //
 
 @Component({
   selector: 'app-task',
@@ -21,7 +22,8 @@ export class TaskComponent implements OnInit {
     private route: ActivatedRoute,
     private projectListingService: ProjectListingService,
     private taskService: TaskService,
-    private userService: UserServiceService // Inject the UserServiceService
+    private userService: UserServiceService, // Inject the UserServiceService
+    private router: Router
   ) {
     this.route.params.subscribe((params) => {
       this.projectId = params['id'];
@@ -118,5 +120,11 @@ export class TaskComponent implements OnInit {
         this.fetchTasks(); // Fetch updated tasks after deletion
       });
     }
+  }
+  logout() {
+    // Perform logout actions here, e.g., clearing user session, etc.
+
+    // Navigate to the login page
+    this.router.navigate(['/login']);
   }
 }
