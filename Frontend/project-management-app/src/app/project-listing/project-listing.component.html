@@ -1,7 +1,7 @@
 <!-- project-listing.component.html -->
 <nav class="navbar_project">
   <div class="navbar-brand">
-    <p>QuickPlan</p>
+    <p>Projects</p>
   </div>
   <div class="navbar-logout">
     <button (click)="logout()">Logout</button>
@@ -71,7 +71,7 @@
           <p>Description: {{ project.description }}</p>
           <p>Start Date: {{ project.startDate }}</p>
           <p>End Date: {{ project.endDate }}</p>
-          <p>Project Manager: {{ project.projectManager }}</p>
+          <p>Project Manager: {{ project.projectManagerName }}</p>
 
           <button (click)="onEditClick(project)" class="edit-project-button">
             Edit Project

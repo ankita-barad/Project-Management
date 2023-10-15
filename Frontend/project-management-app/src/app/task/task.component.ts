@@ -127,4 +127,7 @@ export class TaskComponent implements OnInit {
     // Navigate to the login page
     this.router.navigate(['/login']);
   }
+  navigateToProjects() {
+    this.router.navigate(['/project']);
+  }
 }

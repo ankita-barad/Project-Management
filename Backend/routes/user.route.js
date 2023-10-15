@@ -59,7 +59,7 @@ userRouter.post("/login", async (req, res, next) => {
     );
 
     // Return the token to the client
-    res.json({ token });
+    res.json({ token, user });
   } catch (error) {
     next(error);
   }

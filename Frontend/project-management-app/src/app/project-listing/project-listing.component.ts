@@ -58,10 +58,6 @@ export class ProjectListingComponent implements OnInit {
   }
 
   addProject(): void {
-    // Retrieve the Bearer token from local storage
-    const authToken = localStorage.getItem('authToken');
-    console.log(authToken);
-
     this.projectListingService.addProject(this.newProject).subscribe(() => {
       // Reset the newProject object
       this.newProject = {};

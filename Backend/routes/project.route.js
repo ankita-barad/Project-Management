@@ -5,26 +5,30 @@ const { auth } = require("../middleware/validateToken");
 const {
   requireAdminProjectManagerRoles,
 } = require("../middleware/admin_project_role");
+const { UserModel } = require("../models/user.model");
 
 // Create a new project
 projectRouter.post(
   "/create",
   auth,
   requireAdminProjectManagerRoles,
-
   async (req, res) => {
     try {
+      console.log("ahajj");
+      const user = await UserModel.findById(req.userId);
       const { name, description, startDate, endDate } = req.body;
       const project = new ProjectModel({
         name,
         description,
         startDate,
         endDate,
+        projectManagerName: user.username,
         projectManager: req.userId,
       });
       const savedProject = await project.save();
       res.json(savedProject);
     } catch (err) {
+      console.log(err);
       res.status(400).json({ error: err.message });
     }
   }
@@ -56,6 +60,8 @@ projectRouter.get("/get/:id", async (req, res) => {
 // Update a project by ID
 projectRouter.put(
   "/update/:id",
+  auth,
+  requireAdminProjectManagerRoles,
 
   async (req, res) => {
     try {
@@ -75,16 +81,23 @@ projectRouter.put(
 );
 
 // Delete a project by ID
-projectRouter.delete("/delete/:id", async (req, res) => {
-  try {
-    const deletedProject = await ProjectModel.findByIdAndRemove(req.params.id);
-    if (!deletedProject) {
-      return res.status(404).json({ error: "Project not found" });
+projectRouter.delete(
+  "/delete/:id",
+  auth,
+  requireAdminProjectManagerRoles,
+  async (req, res) => {
+    try {
+      const deletedProject = await ProjectModel.findByIdAndRemove(
+        req.params.id
+      );
+      if (!deletedProject) {
+        return res.status(404).json({ error: "Project not found" });
+      }
+      res.json({ message: "Project deleted successfully" });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
     }
-    res.json({ message: "Project deleted successfully" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
   }
-});
+);
 
 module.exports = { projectRouter };

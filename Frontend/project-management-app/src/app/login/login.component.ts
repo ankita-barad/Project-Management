@@ -27,6 +27,7 @@ export class LoginComponent {
         if (response.token) {
           // Store the token in local storage
           localStorage.setItem('authToken', response.token);
+          localStorage.setItem('user', JSON.stringify(response.user));
         }
         // For simplicity, we'll navigate to the dashboard route on successful login
         this.router.navigate(['/project']);
