@@ -2,14 +2,16 @@ const express = require("express");
 const projectRouter = express.Router();
 const { ProjectModel } = require("../models/project.model");
 const { auth } = require("../middleware/validateToken");
-const { requireRole } = require("../middleware/role");
+const {
+  requireAdminProjectManagerRoles,
+} = require("../middleware/admin_project_role");
 
 // Create a new project
 projectRouter.post(
   "/create",
   auth,
-  requireRole("admin"),
-  requireRole("project_manager"),
+  requireAdminProjectManagerRoles,
+
   async (req, res) => {
     try {
       const { name, description, startDate, endDate } = req.body;
@@ -54,9 +56,7 @@ projectRouter.get("/get/:id", async (req, res) => {
 // Update a project by ID
 projectRouter.put(
   "/update/:id",
-  auth,
-  requireRole("admin"),
-  requireRole("project_manager"),
+
   async (req, res) => {
     try {
       const updatedProject = await ProjectModel.findByIdAndUpdate(
@@ -75,24 +75,16 @@ projectRouter.put(
 );
 
 // Delete a project by ID
-projectRouter.delete(
-  "/delete/:id",
-  auth,
-  requireRole("admin"),
-  requireRole("project_manager"),
-  async (req, res) => {
-    try {
-      const deletedProject = await ProjectModel.findByIdAndRemove(
-        req.params.id
-      );
-      if (!deletedProject) {
-        return res.status(404).json({ error: "Project not found" });
-      }
-      res.json({ message: "Project deleted successfully" });
-    } catch (err) {
-      res.status(500).json({ error: err.message });
+projectRouter.delete("/delete/:id", async (req, res) => {
+  try {
+    const deletedProject = await ProjectModel.findByIdAndRemove(req.params.id);
+    if (!deletedProject) {
+      return res.status(404).json({ error: "Project not found" });
     }
+    res.json({ message: "Project deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
-);
+});
 
 module.exports = { projectRouter };

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ProjectListingService } from '../project-listing.service';
 import { Router } from '@angular/router'; //
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-project-listing',
@@ -57,6 +58,10 @@ export class ProjectListingComponent implements OnInit {
   }
 
   addProject(): void {
+    // Retrieve the Bearer token from local storage
+    const authToken = localStorage.getItem('authToken');
+    console.log(authToken);
+
     this.projectListingService.addProject(this.newProject).subscribe(() => {
       // Reset the newProject object
       this.newProject = {};

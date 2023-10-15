@@ -1,7 +1,7 @@
 <!-- project-listing.component.html -->
 <nav class="navbar_project">
   <div class="navbar-brand">
-    <p>Projects</p>
+    <p>QuickPlan</p>
   </div>
   <div class="navbar-logout">
     <button (click)="logout()">Logout</button>
@@ -9,6 +9,7 @@
 </nav>
 <div class="project-listing-container">
   <div class="left-container">
+    <h1 class="project_heading">Project</h1>
     <form (ngSubmit)="addProject()" class="add-project-form">
       <label for="name">Name:</label>
       <input

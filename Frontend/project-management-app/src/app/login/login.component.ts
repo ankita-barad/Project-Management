@@ -23,6 +23,11 @@ export class LoginComponent {
       (response) => {
         // Login successful, handle the response (e.g., store user data, navigate to dashboard)
         console.log('Login successful:', response);
+
+        if (response.token) {
+          // Store the token in local storage
+          localStorage.setItem('authToken', response.token);
+        }
         // For simplicity, we'll navigate to the dashboard route on successful login
         this.router.navigate(['/project']);
       },

@@ -111,6 +111,20 @@ button:hover {
   align-items: center;
   height: calc(100vh - 64px); /* Adjust based on your navbar height */
 }
+.register_login {
+  font-size: 18px;
+  text-align: center;
+}
+.register_login a {
+  color: var(--primary-color);
+}
+.login_register {
+  font-size: 18px;
+  text-align: center;
+}
+.login_register a {
+  color: var(--primary-color);
+}
 
 .registration-form {
   width: 50%; /* Adjust the width of the form side as needed */
@@ -223,6 +237,16 @@ button:hover {
   color: white;
   border-radius: 8px;
 }
+.project_heading {
+  width: 100px;
+  padding: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+}
+.navbar-project-name {
+  margin-left: 80px;
+}
 
 .view-details-button {
   background-color: var(--primary-color);
@@ -275,7 +299,6 @@ button:hover {
 
 /* Edit project form */
 .edit-project-form {
-  display: none;
   background-color: #f7f7f7;
   padding: 10px;
   border: 1px solid #ccc;

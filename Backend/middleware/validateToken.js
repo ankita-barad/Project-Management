@@ -3,6 +3,12 @@ const { UserModel } = require("../models/user.model");
 
 const auth = async (req, res, next) => {
   try {
+    // Check if Authorization header exists
+    if (!req.headers.authorization) {
+      return res
+        .status(401)
+        .json({ message: "Unauthorized - Missing Authorization header" });
+    }
     const token = req.headers.authorization.split(" ")[1];
     console.log(token);
 
